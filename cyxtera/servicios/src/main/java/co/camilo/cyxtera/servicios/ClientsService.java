@@ -7,7 +7,6 @@ package co.camilo.cyxtera.servicios;
 
 import co.camilo.cyxtera.modelo.Client;
 import java.util.List;
-import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 
@@ -23,4 +22,5 @@ public interface ClientsService {
      * @return Lista de @link{TipoTraslado}
      */
     public List<Client> getClients();
+    public Client postClient(Client cliente);
 }

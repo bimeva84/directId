@@ -5,6 +5,7 @@
  */
 package co.camilo.cyxtera.controlador;
 
+import co.camilo.cyxtera.modelo.Client;
 import co.camilo.cyxtera.web.dto.RespuestaDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,10 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import co.camilo.cyxtera.servicios.ClientsService;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  *
- * @author crojas
+ * @author carojas
  */
 @RestController
 @RequestMapping("/clients")
@@ -28,11 +30,21 @@ public class clientController {
     private ClientsService clientsService;
     
     @CrossOrigin(origins = "http://localhost:4200")
-    @RequestMapping(value="/loadClients", method=RequestMethod.GET)
+    @RequestMapping(method=RequestMethod.GET)
     public ResponseEntity getClients() {
         
         RespuestaDto respuesta = new RespuestaDto(clientsService.getClients());
         
         return new ResponseEntity(respuesta, HttpStatus.OK);
     }
+    
+    @CrossOrigin(origins = "http://localhost:4200")
+    @RequestMapping(method=RequestMethod.POST)
+    public ResponseEntity setClients(@RequestBody Client dto) {
+        
+        RespuestaDto respuesta = new RespuestaDto(clientsService.postClient(dto));
+        
+        return new ResponseEntity(respuesta, HttpStatus.CREATED);
+    }
+    
 }

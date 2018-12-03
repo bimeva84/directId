@@ -6,11 +6,9 @@
 package co.camilo.cyxtera.servicios;
 
 import co.camilo.cyxtera.modelo.Client;
-import co.camilo.cyxtera.persistencia.TipoTrasladoRepositorio;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -19,26 +17,41 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class ClientsServiceImpl implements ClientsService {
-    
+
     @Override
     public List<Client> getClients() {
-        
+
         ArrayList<Client> clientes = new ArrayList<Client>();
         Client cliente = new Client();
-        
-        
+
         // Se ingresa los clientes
-        cliente.setBusinessId("Jgutierrez");
+        cliente.setSharedKey("Jgutierrez");
         cliente.setBusinessId("Juan Gutierrez");
         cliente.setEmail("jgutierrez@netsecure.ci");
         cliente.setPhone("3106996767");
         cliente.setStartDate(new Date());
-        
+
         clientes.add(cliente);
-        
-        
-        
-        return (List<Client>) new Client();
+
+        return clientes;
     }
-    
+
+    @Override
+    public Client postClient(Client cliente) {
+
+        Client clienteNew = new Client();
+        
+        if (null != cliente) {
+            // Se ingresa los clientes
+            clienteNew.setSharedKey(cliente.getSharedKey());
+            clienteNew.setBusinessId(cliente.getBusinessId());
+            clienteNew.setEmail(cliente.getEmail());
+            clienteNew.setPhone(cliente.getPhone());
+            clienteNew.setStartDate(new Date());
+        }
+        
+        return clienteNew;
+
+    }
+
 }
